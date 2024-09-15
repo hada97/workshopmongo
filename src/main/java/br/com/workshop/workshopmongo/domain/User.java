@@ -1,18 +1,20 @@
 package br.com.workshop.workshopmongo.domain;
 
-
 import lombok.Getter;
 import lombok.Setter;
-
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import java.util.Objects;
 
+@Document(collection = "user")
 @Setter
 @Getter
 public class User implements Serializable {
 
     private  static final long serialVersionUID=1l;
 
+    @Id
     private String id;
     private String email;
     private String name;
