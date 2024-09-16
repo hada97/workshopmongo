@@ -1,17 +1,20 @@
 package br.com.workshop.workshopmongo.domain;
 
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
-
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
 @Document(collection = "user")
 @Setter
 @Getter
+@EqualsAndHashCode
 public class User implements Serializable {
 
     @Serial
@@ -22,20 +25,10 @@ public class User implements Serializable {
     private String email;
     private String name;
 
+    @DBRef(lazy = true)
+    private List<Post> posts = new ArrayList<>();
+
     public User(){
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(id);
     }
 
     public User(String id, String name, String email){

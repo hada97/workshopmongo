@@ -1,4 +1,4 @@
-# API Rest Tópicos e comentarios
+# API Spring Rest com MongoDB
 
 ## 💻 Sobre o Projeto
 
@@ -12,7 +12,7 @@ A API oferece as seguintes funcionalidades:
 
 ## 🛠 Tecnologias Utilizadas
 
-A API REST do projeto foi desenvolvida utilizando as seguintes tecnologias:
+A API foi desenvolvida utilizando as seguintes tecnologias:
 - **Java 17**: Linguagem de programação utilizada.
 - **Spring Boot 3**: Framework para desenvolvimento de aplicações Java.
 - **Maven**: Ferramenta de automação e gerenciamento de dependências.
@@ -25,7 +25,7 @@ A API REST do projeto foi desenvolvida utilizando as seguintes tecnologias:
 
 ## 📝 Licença
 
-Este projeto foi desenvolvido como parte do curso de Java e Spring Boot na escola Alura.
+Este projeto é licenciado sob a Licença Aberta.
 
 ## 🚀 Como Começar
 
