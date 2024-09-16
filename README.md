@@ -7,8 +7,8 @@
 ## ⚙️ Funcionalidades
 
 A API oferece as seguintes funcionalidades:
-- **CRUD de Médicos**: Criação, leitura, atualização e exclusão de registros de médicos.
-- **CRUD de Pacientes**: Criação, leitura, atualização e exclusão de registros de pacientes.
+- **CRUD de Users**: Criação, leitura, atualização e exclusão de registros de Users.
+- **CRUD de Posts**: Criação, leitura, atualização e exclusão de registros de Posts.
 
 ## 🛠 Tecnologias Utilizadas
 

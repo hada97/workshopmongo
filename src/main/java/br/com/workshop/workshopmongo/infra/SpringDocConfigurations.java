@@ -13,7 +13,7 @@ public class SpringDocConfigurations {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("API")
+                        .title("API Spring + MongoDB")
                         .version("v1")
                         .description("[GitHub](https://github.com/hada97/workshopmongo)\n\n"
                         ));
