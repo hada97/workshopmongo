@@ -1,7 +1,6 @@
 package br.com.workshop.workshopmongo.services;
 
 import br.com.workshop.workshopmongo.domain.Post;
-import br.com.workshop.workshopmongo.dto.PostDto;
 import br.com.workshop.workshopmongo.repository.PostRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,7 +44,7 @@ public class PostService {
     }
 
     //CRIA UM USER COM OS DADOS DO DTO
-    public Post fromDto(PostDto objDto) {
+    public Post fromDto(Post objDto) {
         return new Post(objDto.getId(), objDto.getDateTime(), objDto.getTitle(), objDto.getBody(), objDto.getAuthor());
     }
 }

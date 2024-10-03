@@ -1,6 +1,8 @@
 package br.com.workshop.workshopmongo.dto;
 
 import br.com.workshop.workshopmongo.domain.User;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.annotation.Id;
@@ -25,7 +27,10 @@ public class UserDto implements Serializable {
 
     @Id
     private String id;
+    @Email
+    @NotBlank
     private String email;
+    @NotBlank
     private String name;
 
 }

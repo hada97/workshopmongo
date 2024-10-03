@@ -4,6 +4,7 @@ import br.com.workshop.workshopmongo.domain.Post;
 import br.com.workshop.workshopmongo.domain.User;
 import br.com.workshop.workshopmongo.dto.UserDto;
 import br.com.workshop.workshopmongo.services.UserService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,7 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody UserDto objDto){
+    public ResponseEntity<Void> insert(@Valid @RequestBody UserDto objDto){
         User obj = service.fromDto(objDto);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -47,7 +48,7 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody UserDto objDto, @PathVariable String id){
+    public ResponseEntity<Void> update(@Valid @RequestBody UserDto objDto, @PathVariable String id){
         User obj = service.fromDto(objDto);
         obj.setId(id);
         obj = service.update(obj);
@@ -55,7 +56,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}/posts")
-    public ResponseEntity<List<Post>> findPosts(@PathVariable String id){
+    public ResponseEntity<List<Post>> findPosts(@Valid @PathVariable String id){
         User obj = service.findById(id);
         return ResponseEntity.ok().body(obj.getPosts());
     }

@@ -1,5 +1,6 @@
 package br.com.workshop.workshopmongo.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import java.io.Serial;
@@ -21,9 +22,9 @@ public class CommentDTO implements Serializable {
 
     }
 
-    public CommentDTO(String text, Date date, AuthorDto authorDto) {
+    public CommentDTO(String text, Date date, AuthorDto author) {
         this.text = text;
         this.date = date;
-        this.author = new AuthorDto(authorDto);
+        this.author = author;
     }
 }

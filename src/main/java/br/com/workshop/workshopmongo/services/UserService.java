@@ -48,7 +48,6 @@ public class UserService {
         newObj.setEmail(obj.getEmail());
     }
 
-    //CRIA UM USER COM OS DADOS DO DTO
     public User fromDto(UserDto objDto) {
         return new User(objDto.getId(), objDto.getName(), objDto.getEmail());
     }

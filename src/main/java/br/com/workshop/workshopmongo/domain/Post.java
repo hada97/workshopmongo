@@ -2,6 +2,7 @@ package br.com.workshop.workshopmongo.domain;
 
 import br.com.workshop.workshopmongo.dto.AuthorDto;
 import br.com.workshop.workshopmongo.dto.CommentDTO;
+import jakarta.validation.constraints.NotBlank;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -9,7 +10,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import org.springframework.data.annotation.Id;
 
@@ -23,9 +23,16 @@ public class Post implements Serializable {
 
     @Id
     private String id;
+
     private LocalDateTime dateTime;
+
+    @NotBlank
     private String title;
+
+    @NotBlank
     private String body;
+
+    @NotBlank
     private AuthorDto author;
 
     private List<CommentDTO> comments = new ArrayList<>();

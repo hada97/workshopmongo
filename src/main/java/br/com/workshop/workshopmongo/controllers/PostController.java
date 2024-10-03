@@ -1,8 +1,8 @@
 package br.com.workshop.workshopmongo.controllers;
 
 import br.com.workshop.workshopmongo.domain.Post;
-import br.com.workshop.workshopmongo.dto.PostDto;
 import br.com.workshop.workshopmongo.services.PostService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,20 +19,19 @@ public class PostController {
     private PostService service;
 
     @GetMapping
-    public ResponseEntity<List<PostDto>> findAll() {
+    public ResponseEntity<List<Post>> findAll() {
         List<Post> list = service.findAll();
-        List<PostDto> listDto = list.stream().map(PostDto::new).collect(Collectors.toList());
-        return ResponseEntity.ok().body(listDto);
+        return ResponseEntity.ok().body(list);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PostDto> findById(@PathVariable String id) {
+    public ResponseEntity<Post> findById(@PathVariable String id) {
         Post obj = service.findById(id);
-        return ResponseEntity.ok().body(new PostDto(obj));
+        return ResponseEntity.ok().body(obj);
     }
 
     @PostMapping
-    public ResponseEntity<Void> insert(@RequestBody PostDto objDto) {
+    public ResponseEntity<Void> insert(@Valid @RequestBody Post objDto) {
         Post obj = service.fromDto(objDto);
         obj = service.insert(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
@@ -46,7 +45,7 @@ public class PostController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> update(@RequestBody PostDto objDto, @PathVariable String id) {
+    public ResponseEntity<Void> update(@RequestBody Post objDto, @PathVariable String id) {
         Post obj = service.fromDto(objDto);
         obj.setId(id);
         obj = service.update(obj);
