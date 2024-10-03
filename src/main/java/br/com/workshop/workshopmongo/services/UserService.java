@@ -1,8 +1,10 @@
 package br.com.workshop.workshopmongo.services;
 
+import br.com.workshop.workshopmongo.controllers.exceptions.EmailAlreadyExistsException;
 import br.com.workshop.workshopmongo.domain.User;
 import br.com.workshop.workshopmongo.dto.UserDto;
 import br.com.workshop.workshopmongo.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -18,12 +20,15 @@ public class UserService {
         return repository.findAll();
     }
 
-    public User findById(String id) {
+    public User findById(@Valid String id) {
         Optional<User> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
-    public User insert(User obj) {
+    public User insert(@Valid User obj) {
+        if (repository.findByEmail(obj.getEmail()) != null) {
+            throw new EmailAlreadyExistsException("O email já está cadastrado");
+        }
         return repository.insert(obj);
     }
 
@@ -32,7 +37,7 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    public User update(User obj) {
+    public User update(@Valid User obj) {
         User newObj = findById(obj.getId());
         updateData(newObj, obj);
         return repository.save(newObj);

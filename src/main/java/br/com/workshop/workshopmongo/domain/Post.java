@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,7 @@ public class Post implements Serializable {
 
     @Id
     private String id;
-    private Date date;
+    private LocalDateTime dateTime;
     private String title;
     private String body;
     private AuthorDto author;
@@ -30,15 +31,17 @@ public class Post implements Serializable {
     private List<CommentDTO> comments = new ArrayList<>();
 
     public Post() {
+        this.dateTime = LocalDateTime.now();
     }
 
-    public Post(String id, Date date, String title, String body, AuthorDto author) {
+    public Post(String id, LocalDateTime dateTime, String title, String body, AuthorDto author) {
         super();
         this.id = id;
-        this.date = date;
+        this.dateTime = LocalDateTime.now();
         this.title = title;
         this.body = body;
         this.author = author;
     }
-
 }
+
+

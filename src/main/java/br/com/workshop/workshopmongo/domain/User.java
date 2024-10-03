@@ -1,9 +1,10 @@
 package br.com.workshop.workshopmongo.domain;
 
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.*;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 import java.io.Serial;
@@ -13,8 +14,9 @@ import java.util.List;
 
 @Document(collection = "user")
 @Setter
+@AllArgsConstructor
 @Getter
-@EqualsAndHashCode
+@EqualsAndHashCode(of = "id")
 public class User implements Serializable {
 
     @Serial
@@ -22,7 +24,13 @@ public class User implements Serializable {
 
     @Id
     private String id;
+
+    @NotEmpty(message = "Email não pode ser vazio")
+    @Email(message = "Email should be valid")
+    @Indexed(unique = true) // Anotação para garantir que o email seja único no banco de dados
     private String email;
+
+    @NotEmpty(message = "Nome não pode ser vazio")
     private String name;
 
     @DBRef(lazy = true)

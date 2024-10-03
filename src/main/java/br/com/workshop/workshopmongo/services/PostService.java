@@ -3,6 +3,7 @@ package br.com.workshop.workshopmongo.services;
 import br.com.workshop.workshopmongo.domain.Post;
 import br.com.workshop.workshopmongo.dto.PostDto;
 import br.com.workshop.workshopmongo.repository.PostRepository;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import java.util.List;
@@ -18,21 +19,21 @@ public class PostService {
         return repository.findAll();
     }
 
-    public Post findById(String id) {
+    public Post findById(@Valid String id) {
         Optional<Post> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
 
-    public Post insert(Post obj) {
+    public Post insert(@Valid Post obj) {
         return repository.insert(obj);
     }
 
-    public void delete(String id) {
+    public void delete(@Valid String id) {
         findById(id);
         repository.deleteById(id);
     }
 
-    public Post update(Post obj) {
+    public Post update(@Valid Post obj) {
         Post newObj = findById(obj.getId());
         updateData(newObj, obj);
         return repository.save(newObj);
@@ -45,6 +46,6 @@ public class PostService {
 
     //CRIA UM USER COM OS DADOS DO DTO
     public Post fromDto(PostDto objDto) {
-        return new Post(objDto.getId(), objDto.getDate(), objDto.getTitle(), objDto.getBody(), objDto.getAuthor());
+        return new Post(objDto.getId(), objDto.getDateTime(), objDto.getTitle(), objDto.getBody(), objDto.getAuthor());
     }
 }

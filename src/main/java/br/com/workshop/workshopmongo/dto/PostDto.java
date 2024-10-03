@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.springframework.data.annotation.Id;
 import java.io.Serial;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Setter
@@ -17,7 +18,7 @@ public class PostDto implements Serializable {
 
     @Id
     private String id;
-    private Date date;      // Certifique-se de adicionar a data
+    private LocalDateTime dateTime;  // Certifique-se de adicionar a data
     private String title;   // Adicione o título do post
     private String body;    // Adicione o corpo do post
     private AuthorDto author; // Altere para o tipo correto
@@ -27,7 +28,7 @@ public class PostDto implements Serializable {
 
     public PostDto(Post obj) {
         this.id = obj.getId();
-        this.date = obj.getDate();
+        this.dateTime = LocalDateTime.now();
         this.title = obj.getTitle();
         this.body = obj.getBody();
         this.author = new AuthorDto(obj.getAuthor()); // Supondo que você tenha um AuthorDto

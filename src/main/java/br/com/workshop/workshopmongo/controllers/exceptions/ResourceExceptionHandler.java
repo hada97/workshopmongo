@@ -16,6 +16,17 @@ public class ResourceExceptionHandler {
         StandardError err = new StandardError(System.currentTimeMillis(), status.toString(), "Não encontrado", e.getMessage(), request.getRequestURI());
         return ResponseEntity.status(status).body(err);
     }
+
+    @ExceptionHandler(EmailAlreadyExistsException.class)
+    public ResponseEntity<String> handleEmailAlreadyExists(EmailAlreadyExistsException ex) {
+        return new ResponseEntity<>(ex.getMessage(), HttpStatus.CONFLICT);
+    }
+
+    @ExceptionHandler(Exception.class)
+    public ResponseEntity<String> handleGenericException(Exception message) {
+        return new ResponseEntity<>("Ocorreu um erro inesperado.", HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+
 }
 
 
