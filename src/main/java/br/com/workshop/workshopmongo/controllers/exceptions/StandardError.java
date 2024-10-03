@@ -1,4 +1,4 @@
-package br.com.workshop.workshopmongo.resources.exceptions;
+package br.com.workshop.workshopmongo.controllers.exceptions;
 
 
 import lombok.Getter;

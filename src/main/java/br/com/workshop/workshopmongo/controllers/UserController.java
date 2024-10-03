@@ -1,4 +1,4 @@
-package br.com.workshop.workshopmongo.resources;
+package br.com.workshop.workshopmongo.controllers;
 
 import br.com.workshop.workshopmongo.domain.Post;
 import br.com.workshop.workshopmongo.domain.User;
@@ -14,27 +14,23 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/users")
-public class UserResource {
-
-    //Classe equivale a Controller
+public class UserController {
 
     @Autowired
     private UserService service;
 
-    @RequestMapping(method = RequestMethod.GET)
+    @GetMapping
     public ResponseEntity<List<UserDto>> findAll(){
         List<User> list = service.findAll();
         List<UserDto> listDto = list.stream().map(UserDto::new).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
     }
 
-
     @GetMapping("/{id}")
     public ResponseEntity<UserDto> findById(@PathVariable String id){
         User obj = service.findById(id);
         return ResponseEntity.ok().body(new UserDto(obj));
     }
-
 
     @PostMapping
     public ResponseEntity<Void> insert(@RequestBody UserDto objDto){
@@ -63,6 +59,5 @@ public class UserResource {
         User obj = service.findById(id);
         return ResponseEntity.ok().body(obj.getPosts());
     }
-
 
 }

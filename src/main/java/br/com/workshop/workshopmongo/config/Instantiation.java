@@ -2,7 +2,7 @@ package br.com.workshop.workshopmongo.config;
 
 import br.com.workshop.workshopmongo.domain.Post;
 import br.com.workshop.workshopmongo.domain.User;
-import br.com.workshop.workshopmongo.dto.AuthorDTO;
+import br.com.workshop.workshopmongo.dto.AuthorDto;
 import br.com.workshop.workshopmongo.dto.CommentDTO;
 import br.com.workshop.workshopmongo.repository.PostRepository;
 import br.com.workshop.workshopmongo.repository.UserRepository;
@@ -36,10 +36,10 @@ public class Instantiation implements CommandLineRunner {
         User bob = new User(null, "Bob Grey", "bob@gmail.com");
         userRepository.saveAll(Arrays.asList(maria,alex,bob));
 
-        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar pra Manaus!", new AuthorDTO(maria));
-        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Dia top", "acordei feliz!", new AuthorDTO(maria));
+        Post post1 = new Post(null, sdf.parse("21/03/2018"), "Partiu viagem", "Vou viajar pra Manaus!", new AuthorDto(maria));
+        Post post2 = new Post(null, sdf.parse("23/03/2018"), "Dia top", "acordei feliz!", new AuthorDto(maria));
 
-        CommentDTO c1= new CommentDTO("Boa viagem!", sdf.parse("21/03/2018"), new AuthorDTO(alex));
+        CommentDTO c1= new CommentDTO("Boa viagem!", sdf.parse("21/03/2018"), new AuthorDto(alex));
         post1.getComments().addAll(Arrays.asList(c1));
 
         postRepository.saveAll(Arrays.asList(post1,post2));

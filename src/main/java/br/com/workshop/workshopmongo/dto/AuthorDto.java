@@ -7,17 +7,20 @@ import java.io.Serializable;
 
 @Getter
 @Setter
-public class AuthorDTO implements Serializable {
+public class AuthorDto implements Serializable {
 
     private String id;
     private String name;
 
-    public AuthorDTO(){
+    public AuthorDto(){
     }
 
-    public AuthorDTO(User obj){
+    public AuthorDto(User obj){
         id=obj.getId();
         name= obj.getName();
+    }
+
+    public AuthorDto(AuthorDto author) {
     }
 
 }
