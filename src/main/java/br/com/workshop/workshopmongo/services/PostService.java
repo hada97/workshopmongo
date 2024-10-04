@@ -37,7 +37,7 @@ public class PostService {
         repository.deleteById(id);
     }
 
-    public Post update(@Valid Post obj) {
+    public Post update(Post obj) {
         Post newObj = findById(obj.getId());
         updateData(newObj, obj);
         return repository.save(newObj);
