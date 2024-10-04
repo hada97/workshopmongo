@@ -20,7 +20,7 @@ public class UserService {
         return repository.findAll();
     }
 
-    public User findById(@Valid String id) {
+    public User findById(String id) {
         Optional<User> obj = repository.findById(id);
         return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado"));
     }
@@ -37,7 +37,7 @@ public class UserService {
         repository.deleteById(id);
     }
 
-    public User update(@Valid User obj) {
+    public User update(User obj) {
         User newObj = findById(obj.getId());
         updateData(newObj, obj);
         return repository.save(newObj);
