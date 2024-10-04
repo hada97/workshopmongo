@@ -1,8 +1,6 @@
 package br.com.workshop.workshopmongo.domain;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
@@ -25,13 +23,17 @@ public class User implements Serializable {
 
     @Id
     private String id;
+
     @NotBlank
     @Email(message = "Email should be valid")
-    @Indexed(unique = true) // Anotação para garantir que o email seja único no banco de dados
+    @Indexed(unique = true)
     private String email;
+
+    @Size(min = 3, max = 24)
     @NotBlank
     private String name;
-    @DBRef(lazy = true)
+
+    @DBRef(lazy = false)
     private List<Post> posts = new ArrayList<>();
 
     public User(){

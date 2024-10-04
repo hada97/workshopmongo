@@ -3,6 +3,9 @@ package br.com.workshop.workshopmongo.domain;
 import br.com.workshop.workshopmongo.dto.AuthorDto;
 import br.com.workshop.workshopmongo.dto.CommentDTO;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +35,6 @@ public class Post implements Serializable {
     @NotBlank
     private String body;
 
-    @NotBlank
     private AuthorDto author;
 
     private List<CommentDTO> comments = new ArrayList<>();

@@ -34,6 +34,7 @@ public class PostController {
     public ResponseEntity<Void> insert(@Valid @RequestBody Post objDto) {
         Post obj = service.fromDto(objDto);
         obj = service.insert(obj);
+        service.atualizarUser(obj);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
