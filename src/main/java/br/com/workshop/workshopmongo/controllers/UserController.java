@@ -7,6 +7,7 @@ import br.com.workshop.workshopmongo.services.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
@@ -21,6 +22,7 @@ public class UserController {
     private UserService service;
 
     @GetMapping
+    @Transactional(readOnly = true)
     public ResponseEntity<List<UserDto>> findAll(){
         List<User> list = service.findAll();
         List<UserDto> listDto = list.stream().map(UserDto::new).collect(Collectors.toList());
@@ -28,6 +30,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
+    @Transactional(readOnly = true)
     public ResponseEntity<UserDto> findById(@PathVariable String id){
         User obj = service.findById(id);
         return ResponseEntity.ok().body(new UserDto(obj));
