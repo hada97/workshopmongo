@@ -2,7 +2,7 @@
 
 ## 💻 Sobre o Projeto
 
-[Veja como ficou em Produção!](https://adailson65workshop-geg6aeb5e2d4encm.brazilsouth-01.azurewebsites.net/swagger-ui/index.html#/user-controller/findAll)
+[Veja como ficou em Produção!](https://workshop-workshop.onrender.com/swagger-ui/index.html)
 
 ## ⚙️ Funcionalidades
 
