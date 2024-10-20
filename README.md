@@ -47,7 +47,15 @@ Para começar a utilizar esta API, siga os passos abaixo:
 
     ```
 
-4. **Acesse a API**: Após iniciar o projeto, a API estará disponível na URL padrão `http://localhost:8080`.
+4. **Acesse a API**: Após iniciar o projeto, a API estará disponível na URL padrão:
+    ```bash
+    http://localhost:8080
+
+    ```
 
 
-5. **Acesse o Swagger**: `http://localhost:8080/swagger-ui/index.html`.
+6. **Acesse o Swagger**:
+   ```bash
+    http://localhost:8080/swagger-ui/index.html
+
+    ```
