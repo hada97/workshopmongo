@@ -18,10 +18,14 @@ function fetchPosts() {
         const postItem = document.createElement('div');
         postItem.classList.add('post-item');
 
+        // Formatar a data e hora sem os segundos
+        const postDate = new Date(post.dateTime);
+        const postFormattedDate = postDate.toLocaleDateString() + ' ' + postDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
         postItem.innerHTML = `
           <h3>${post.title}</h3>
           <p><strong>Autor:</strong> ${post.author.name}</p>
-          <p><strong>Data:</strong> ${new Date(post.dateTime).toLocaleString()}</p>
+          <p><strong>Data:</strong> ${postFormattedDate}</p>
           <p>${post.body}</p>
         `;
 
@@ -32,9 +36,14 @@ function fetchPosts() {
           post.comments.forEach(comment => {
             const commentItem = document.createElement('div');
             commentItem.classList.add('comment-item');
+
+            // Formatar a data do comentário
+            const commentDate = new Date(comment.date);
+            const commentFormattedDate = commentDate.toLocaleDateString() + ' ' + commentDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
             commentItem.innerHTML = `
               <p><strong>${comment.author.name || 'Anônimo'}:</strong> ${comment.text}</p>
-              <p><small>Comentado em: ${new Date(comment.date).toLocaleString()}</small></p>
+              <p><small>Comentado em: ${commentFormattedDate}</small></p>
             `;
             commentsSection.appendChild(commentItem);
           });
@@ -60,6 +69,7 @@ function fetchPosts() {
       loadingStatus.innerText = 'Erro ao carregar os posts.';
     });
 }
+
 
 // Função para deletar um post
 async function deletePost(postId) {
