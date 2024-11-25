@@ -259,6 +259,36 @@ async function deleteUser(userId) {
   }
 }
 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+    // Seleciona os botões de alternância e os formulários
+    const togglePostFormButton = document.getElementById('togglePostFormButton');
+    const createPostForm = document.getElementById('createPostForm');
+
+    const toggleUserFormButton = document.getElementById('toggleUserFormButton');
+    const createUserForm = document.getElementById('createUserForm');
+
+    // Função para alternar a visibilidade do formulário de postagem
+    togglePostFormButton.addEventListener('click', () => {
+        if (createPostForm.style.display === 'none' || createPostForm.style.display === '') {
+            createPostForm.style.display = 'block'; // Exibe o formulário
+        } else {
+            createPostForm.style.display = 'none'; // Esconde o formulário
+        }
+    });
+
+    // Função para alternar a visibilidade do formulário de cadastro de usuário
+    toggleUserFormButton.addEventListener('click', () => {
+        if (createUserForm.style.display === 'none' || createUserForm.style.display === '') {
+            createUserForm.style.display = 'block'; // Exibe o formulário
+        } else {
+            createUserForm.style.display = 'none'; // Esconde o formulário
+        }
+    });
+});
+
+
 // Chama a função pela primeira vez quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
   fetchPosts();  // Carrega os posts

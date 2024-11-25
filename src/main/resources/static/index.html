@@ -23,7 +23,8 @@
             <!-- Formulário para criar um post -->
             <section class="new-post">
                 <h2>Post</h2>
-                <form id="createPostForm">
+                <button id="togglePostFormButton">Criar Post</button>
+                <form id="createPostForm" style="display: none;">
                     <input type="text" id="postTitle" placeholder="Título" required />
                     <input type="text" id="postContent" placeholder="Mensagem" required />
                     <input type="text" id="authorName" placeholder="Nome do Autor" required />
@@ -34,7 +35,6 @@
 
             <section class="posts-feed">
                 <div id="postsList" class="posts-list"></div>
-
                 <div id="loadingStatus" class="loading-status">Carregando ...</div>
             </section>
         </div>
@@ -42,7 +42,8 @@
         <div class="user-container">
             <section class="new-post">
                 <h2>User</h2>
-                <form id="createUserForm">
+                <button id="toggleUserFormButton">Cadastro</button>
+                <form id="createUserForm" style="display: none;">
                     <input type="text" id="username" placeholder="Nome" required />
                     <input type="email" id="email" placeholder="Email" required />
                     <button type="submit">Cadastrar</button>
@@ -51,7 +52,6 @@
 
             <section class="user-feed">
                 <div id="userList" class="user-list"></div>
-
                 <div id="loading" class="loading-status">Carregando ...</div>
             </section>
         </div>
