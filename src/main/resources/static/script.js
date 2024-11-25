@@ -1,3 +1,63 @@
+// Função para enviar um novo post
+document.getElementById("createPostForm").addEventListener("submit", async function (event) {
+    event.preventDefault(); // Evita o comportamento padrão do formulário
+
+    // Pegando os valores dos campos
+    const title = document.getElementById("postTitle").value;
+    const body = document.getElementById("postContent").value;
+    const authorName = document.getElementById("authorName").value;
+    const authorId = document.getElementById("authorId").value;
+
+    // Valida se os campos obrigatórios estão preenchidos
+    if (!title || !body || !authorName || !authorId) {
+        alert("Por favor, preencha todos os campos obrigatórios.");
+        return;
+    }
+
+    // Criando o objeto do post
+    const postData = {
+        title: title,
+        body: body,
+        author: {
+            id: authorId,
+            name: authorName
+        }
+    };
+
+    try {
+        // Enviando o post para o backend
+        const response = await fetch("http://localhost:8080/posts", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(postData) // Envia os dados como JSON
+        });
+
+        // Verifica se a resposta é bem-sucedida
+        if (response.ok) {
+            const data = await response.json(); // Obtém a resposta do servidor
+            console.log("Post criado com sucesso:", data);
+            alert("Post criado com sucesso!");
+            fetchPosts();  // Atualiza a lista de posts
+            document.getElementById("createPostForm").reset();  // Limpa o formulário após o envio
+        } else {
+            // Se não for OK, tenta extrair o corpo como JSON (caso haja)
+            const contentType = response.headers.get("Content-Type");
+            if (contentType && contentType.includes("application/json")) {
+                const data = await response.json();
+                alert("Erro: " + (data.message || "Erro ao criar o post."));
+            } else {
+                const text = await response.text();
+                alert("Erro desconhecido: " + text);
+            }
+        }
+    } catch (error) {
+        alert("Ocorreu um erro ao tentar criar o post: " + error.message);
+    }
+});
+
+
 // Função para buscar posts do servidor
 function fetchPosts() {
   const loadingStatus = document.getElementById('loadingStatus');
@@ -24,9 +84,10 @@ function fetchPosts() {
 
         postItem.innerHTML = `
           <h3>${post.title}</h3>
-          <p><strong>Autor:</strong> ${post.author.name}</p>
-          <p><strong>Data:</strong> ${postFormattedDate}</p>
           <p>${post.body}</p>
+          <p>${post.author.name}</p>
+          <p>${postFormattedDate}</p>
+
         `;
 
         if (post.comments && post.comments.length > 0) {
@@ -43,7 +104,7 @@ function fetchPosts() {
 
             commentItem.innerHTML = `
               <p><strong>${comment.author.name || 'Anônimo'}:</strong> ${comment.text}</p>
-              <p><small>Comentado em: ${commentFormattedDate}</small></p>
+              <p><small>${commentFormattedDate}</small></p>
             `;
             commentsSection.appendChild(commentItem);
           });
@@ -122,8 +183,8 @@ function fetchUsers() {
 
         userItem.innerHTML = `
           <h3>${user.name}</h3>
-          <p><strong>Email:</strong> ${user.email}</p>
-          <p><strong>ID:</strong> ${user.id}</p>
+          <p>${user.email}</p>
+          <p>ID: ${user.id}</p>
         `;
 
         const actionsDiv = document.createElement('div');
@@ -169,6 +230,12 @@ async function deleteUser(userId) {
     }
   }
 }
+
+
+
+
+
+
 
 // Chama a função pela primeira vez quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {

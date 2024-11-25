@@ -25,25 +25,21 @@
                 <h2>Post</h2>
                 <form id="createPostForm">
                     <input type="text" id="postTitle" placeholder="Título" required />
-                    <textarea id="postContent" placeholder="Menssagem" required></textarea>
+                    <input type="text" id="postContent" placeholder="Mensagem" required />
+                    <input type="text" id="authorName" placeholder="Nome do Autor" required />
+                    <input type="text" id="authorId" placeholder="ID do Autor" required />
                     <button type="submit">Publicar</button>
                 </form>
             </section>
 
             <section class="posts-feed">
-                <h2>Feed</h2>
-                <div id="postsList" class="posts-list">
+                <div id="postsList" class="posts-list"></div>
 
-                </div>
-
-                <div id="loadingStatus" class="loading-status">
-                    Carregando ...
-                </div>
+                <div id="loadingStatus" class="loading-status">Carregando ...</div>
             </section>
         </div>
 
         <div class="user-container">
-
             <section class="new-post">
                 <h2>User</h2>
                 <form id="createUserForm">
@@ -54,16 +50,10 @@
             </section>
 
             <section class="user-feed">
-                <h2>Ativos</h2>
+                <div id="userList" class="user-list"></div>
 
-                <div id="userList" class="user-list">
-                </div>
-
-                <div id="loading" class="loading-status">
-                    Carregando ...
-                </div>
+                <div id="loading" class="loading-status">Carregando ...</div>
             </section>
-
         </div>
     </div>
 </main>
