@@ -97,22 +97,33 @@ function fetchUsers() {
       const userList = document.getElementById('userList');
       userList.innerHTML = ''; // Limpa a lista atual de usuários
 
-      // Itera sobre os usuários e cria os elementos para cada um
-      users.forEach(user => {
-        const userItem = document.createElement('div');
-        userItem.classList.add('user-item');
+    users.forEach(user => {
+      const userItem = document.createElement('div');
+      userItem.classList.add('user-item');
 
-        // Criando o HTML para exibir o usuário
-        userItem.innerHTML = `
-          <h3>${user.name}</h3>
-          <p><strong>Email:</strong> ${user.email}</p>
-        `;
+      // Criando o HTML para exibir o usuário
+      userItem.innerHTML = `
+        <h3>${user.name}</h3>
+        <p><strong>Email:</strong> ${user.email}</p>
+        <p><strong>ID:</strong> ${user.id}</p>
+      `;
 
-        // Adiciona o usuário à lista
-        userList.appendChild(userItem);
-      });
+      // Criando os botões de editar e excluir
+      const actionsDiv = document.createElement('div');
+      actionsDiv.classList.add('actions');
+      actionsDiv.innerHTML = `
+        <button onclick="editUser(${user.id})">Editar</button>
+        <button onclick="deleteUser('${user.id}')">Excluir</button>
+      `;
 
-      // Esconde a mensagem de carregamento após a atualização
+      // Adiciona os botões de ação ao item de usuário
+      userItem.appendChild(actionsDiv);
+
+      // Adiciona o usuário à lista
+      userList.appendChild(userItem);
+    });
+
+
       loading.classList.remove('show');
     })
     .catch(error => {
@@ -121,10 +132,90 @@ function fetchUsers() {
     });
 }
 
+
+// Função para criar um novo usuário
+function createUser(event) {
+  event.preventDefault();  // Previne o comportamento padrão do form (recarregar a página)
+
+  // Pega os valores dos campos de nome e email
+  const name = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+
+  // Cria um objeto de usuário com os dados do formulário
+  const userData = { name, email };
+
+  // Envia os dados para o servidor via POST
+  fetch('http://localhost:8080/users', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro ao criar o usuário');
+      }
+      return response.json();
+    })
+    .then(newUser => {
+      console.log('Novo usuário criado:', newUser);
+
+      // Limpa o formulário
+      document.getElementById('createUserForm').reset();
+
+      // Atualiza a lista de usuários
+      fetchUsers();
+
+      // Exibe uma mensagem de sucesso (pop-up simples)
+      alert('Usuário cadastrado com sucesso!');
+    })
+    .catch(error => {
+      console.error('Erro ao criar o usuário:', error);
+    });
+}
+
+
+
+async function deleteUser(userId) {
+  console.log('Tentando excluir o usuário com ID:', userId);
+
+  if (!userId) {
+    console.error('ID inválido!');
+    return; // Aborta a execução
+  }
+
+  // Confirmação antes de excluir
+  if (confirm('Você tem certeza que deseja excluir este usuário?')) {
+    try {
+      const response = await fetch(`http://localhost:8080/users/${userId}`, { method: 'DELETE' });
+
+      if (!response.ok) {
+        throw new Error('Erro ao excluir o usuário');
+      }
+
+      alert('Usuário excluído com sucesso!');
+      fetchUsers();  // Recarregar lista de usuários após a exclusão
+
+    } catch (error) {
+      console.error('Erro ao excluir o usuário:', error);
+    }
+  }
+}
+
+
+
+
 // Chama a função pela primeira vez quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
   fetchPosts();  // Carrega os posts
   fetchUsers();  // Carrega os usuários
   setInterval(fetchPosts, 10000); // Atualiza os posts a cada 10 segundos
   setInterval(fetchUsers, 10000); // Atualiza os usuários a cada 10 segundos
+
+  // Adiciona o evento de envio do formulário para criar um usuário
+  const createUserForm = document.getElementById('createUserForm');
+  createUserForm.addEventListener('submit', createUser);
 });
+
+
