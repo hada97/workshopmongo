@@ -36,13 +36,11 @@ document.getElementById("createPostForm").addEventListener("submit", async funct
 
         // Verifica se a resposta é bem-sucedida
         if (response.ok) {
-            const data = await response.json(); // Obtém a resposta do servidor
-            console.log("Post criado com sucesso:", data);
+            // Como a resposta não tem corpo, apenas verifique se o status foi 201
             alert("Post criado com sucesso!");
             fetchPosts();  // Atualiza a lista de posts
             document.getElementById("createPostForm").reset();  // Limpa o formulário após o envio
         } else {
-            // Se não for OK, tenta extrair o corpo como JSON (caso haja)
             const contentType = response.headers.get("Content-Type");
             if (contentType && contentType.includes("application/json")) {
                 const data = await response.json();
@@ -56,6 +54,8 @@ document.getElementById("createPostForm").addEventListener("submit", async funct
         alert("Ocorreu um erro ao tentar criar o post: " + error.message);
     }
 });
+
+
 
 
 // Função para buscar posts do servidor
