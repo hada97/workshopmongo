@@ -1,4 +1,4 @@
-// Função para enviar um novo post
+// Função para enviar um novo post (Create)
 document.getElementById("createPostForm").addEventListener("submit", async function (event) {
     event.preventDefault(); // Evita o comportamento padrão do formulário
 
@@ -36,7 +36,6 @@ document.getElementById("createPostForm").addEventListener("submit", async funct
 
         // Verifica se a resposta é bem-sucedida
         if (response.ok) {
-            // Como a resposta não tem corpo, apenas verifique se o status foi 201
             alert("Post criado com sucesso!");
             fetchPosts();  // Atualiza a lista de posts
             document.getElementById("createPostForm").reset();  // Limpa o formulário após o envio
@@ -56,9 +55,38 @@ document.getElementById("createPostForm").addEventListener("submit", async funct
 });
 
 
+// Função para criar um novo usuário
+document.getElementById("createUserForm").addEventListener("submit", async function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById('username').value;
+    const email = document.getElementById('email').value;
+
+    const userData = { name, email };
+
+    try {
+        const response = await fetch('http://localhost:8080/users', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(userData),
+        });
+
+        if (response.ok) {
+            alert("Usuário criado com sucesso!");
+            fetchUsers();  // Atualiza a lista de usuários
+            document.getElementById("createUserForm").reset();  // Limpa o formulário após o envio
+        } else {
+            await handleErrorResponse(response);
+        }
+    } catch (error) {
+        alert("Ocorreu um erro ao tentar criar o usuário: " + error.message);
+    }
+});
 
 
-// Função para buscar posts do servidor
+// Função para buscar posts do servidor (Read)
 function fetchPosts() {
   const loadingStatus = document.getElementById('loadingStatus');
   loadingStatus.classList.add('show');
@@ -87,7 +115,6 @@ function fetchPosts() {
           <p>${post.body}</p>
           <p>${post.author.name}</p>
           <p>${postFormattedDate}</p>
-
         `;
 
         if (post.comments && post.comments.length > 0) {
@@ -132,79 +159,7 @@ function fetchPosts() {
 }
 
 
-// Função para deletar um post
-async function deletePost(postId) {
-  console.log('Tentando excluir o post com ID:', postId);
-
-  if (!postId) {
-    console.error('ID inválido!');
-    return; // Aborta a execução se o ID for inválido
-  }
-
-  // Confirmação antes de excluir
-  if (confirm('Você tem certeza que deseja excluir este post?')) {
-    try {
-      const response = await fetch(`http://localhost:8080/posts/${postId}`, {
-        method: 'DELETE',
-      });
-
-      if (!response.ok) {
-        throw new Error('Erro ao excluir o post');
-      }
-
-      alert('Post excluído com sucesso!');
-      fetchPosts();  // Recarregar a lista de posts após a exclusão
-
-    } catch (error) {
-      console.error('Erro ao excluir o post:', error);
-    }
-  }
-}
-
-// Função para criar um novo usuário
-function createUser(event) {
-  event.preventDefault();  // Previne o comportamento padrão do form (recarregar a página)
-
-  // Pega os valores dos campos de nome e email
-  const name = document.getElementById('username').value;
-  const email = document.getElementById('email').value;
-
-  // Cria um objeto de usuário com os dados do formulário
-  const userData = { name, email };
-
-  // Envia os dados para o servidor via POST
-  fetch('http://localhost:8080/users', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(userData),
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error('Erro ao criar o usuário');
-      }
-      return response.json();
-    })
-    .then(newUser => {
-      console.log('Novo usuário criado:', newUser);
-
-      // Limpa o formulário
-      document.getElementById('createUserForm').reset();
-
-      // Atualiza a lista de usuários
-      fetchUsers();
-
-      // Exibe uma mensagem de sucesso (pop-up simples)
-      alert('Usuário cadastrado com sucesso!');
-    })
-    .catch(error => {
-      console.error('Erro ao criar o usuário:', error);
-    });
-}
-
-
-// Função para buscar usuários do servidor
+// Função para buscar usuários do servidor (Read)
 function fetchUsers() {
   const loading = document.getElementById('loading');
   loading.classList.add('show');
@@ -249,7 +204,37 @@ function fetchUsers() {
     });
 }
 
-// Função para deletar um usuário
+
+// Função para deletar um post (Delete)
+async function deletePost(postId) {
+  console.log('Tentando excluir o post com ID:', postId);
+
+  if (!postId) {
+    console.error('ID inválido!');
+    return; // Aborta a execução se o ID for inválido
+  }
+
+  // Confirmação antes de excluir
+  if (confirm('Você tem certeza que deseja excluir este post?')) {
+    try {
+      const response = await fetch(`http://localhost:8080/posts/${postId}`, {
+        method: 'DELETE',
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao excluir o post');
+      }
+
+      alert('Post excluído com sucesso!');
+      fetchPosts();  // Recarregar a lista de posts após a exclusão
+
+    } catch (error) {
+      console.error('Erro ao excluir o post:', error);
+    }
+  }
+}
+
+// Função para deletar um usuário (Delete)
 async function deleteUser(userId) {
   console.log('Tentando excluir o usuário com ID:', userId);
 
