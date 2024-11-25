@@ -19,29 +19,53 @@
 </header>
 
 <main>
-    <div class="container">
-        <!-- Formulário para criar um post -->
-        <section class="new-post">
-            <h2>Novo Post</h2>
-            <form id="createPostForm">
-                <input type="text" id="postTitle" placeholder="Título" required />
-                <textarea id="postContent" placeholder="Menssagem" required></textarea>
-                <button type="submit">Publicar</button>
-            </form>
-        </section>
+    <div class="main-container">
+        <div class="container">
+            <!-- Formulário para criar um post -->
+            <section class="new-post">
+                <h2>Novo Post</h2>
+                <form id="createPostForm">
+                    <input type="text" id="postTitle" placeholder="Título" required />
+                    <textarea id="postContent" placeholder="Menssagem" required></textarea>
+                    <button type="submit">Publicar</button>
+                </form>
+            </section>
 
-        <!-- Feed de posts -->
-        <section class="posts-feed">
-            <h2>Feed</h2>
-            <div id="postsList" class="posts-list">
-                <!-- Os posts serão listados aqui dinamicamente -->
-            </div>
+            <section class="posts-feed">
+                <h2>Feed</h2>
+                <div id="postsList" class="posts-list">
 
-            <!-- Campo para mostrar o status da atualização -->
-            <div id="loadingStatus" class="loading-status">
-                Carregando posts...
-            </div>
-        </section>
+                </div>
+
+                <div id="loadingStatus" class="loading-status">
+                    Carregando ...
+                </div>
+            </section>
+        </div>
+
+        <div class="user-container">
+
+            <section class="new-post">
+                <h2>Novo User</h2>
+                <form id="createUserForm">
+                    <input type="text" id="username" placeholder="Name" required />
+                    <input type="text" id="email" placeholder="Email" required />
+                    <button type="submit">Publicar</button>
+                </form>
+            </section>
+
+            <section class="user-feed">
+                <h2>Ativos</h2>
+
+                <div id="userList" class="user-list">
+                </div>
+
+                <div id="loading" class="loading-status">
+                    Carregando ...
+                </div>
+            </section>
+
+        </div>
     </div>
 </main>
 
