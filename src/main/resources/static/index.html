@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rede Social - Postagens</title>
+    <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+    <div class="navbar">
+        <h1>Social</h1>
+        <nav>
+            <a href="#">Início</a>
+            <a href="#">Perfil</a>
+            <a href="#">Configurações</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <div class="container">
+        <!-- Formulário para criar um post -->
+        <section class="new-post">
+            <h2>Novo Post</h2>
+            <form id="createPostForm">
+                <input type="text" id="postTitle" placeholder="Título" required />
+                <textarea id="postContent" placeholder="Menssagem" required></textarea>
+                <button type="submit">Publicar</button>
+            </form>
+        </section>
+
+        <!-- Feed de posts -->
+        <section class="posts-feed">
+            <h2>Feed</h2>
+            <div id="postsList" class="posts-list">
+                <!-- Os posts serão listados aqui dinamicamente -->
+            </div>
+
+            <!-- Campo para mostrar o status da atualização -->
+            <div id="loadingStatus" class="loading-status">
+                Carregando posts...
+            </div>
+        </section>
+    </div>
+</main>
+
+<footer>
+    <p>&copy; 2024 Rede Social</p>
+</footer>
+
+<!-- A inclusão do script deve vir no final para garantir que o DOM seja carregado primeiro -->
+<script src="script.js"></script>
+</body>
+</html>

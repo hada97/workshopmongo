@@ -1,0 +1,166 @@
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Corpo da página */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000000; /* Fundo preto */
+  color: #8A2BE2; /* Texto roxo */
+  line-height: 1.6;
+  padding: 0;
+  margin: 0;
+}
+
+/* Cabeçalho */
+header {
+  background-color: #1a1a1a; /* Fundo escuro */
+  color: #8A2BE2; /* Texto roxo */
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+header h1 {
+  font-size: 2rem;
+  margin: 0;
+}
+
+header nav a {
+  color: #8A2BE2; /* Links roxos */
+  text-decoration: none;
+  margin: 0 15px;
+}
+
+header nav a:hover {
+  text-decoration: underline;
+}
+
+/* Container principal */
+.container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #222222; /* Fundo do container escuro */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+}
+
+/* Formulário de novo post */
+.new-post {
+  margin-bottom: 20px;
+}
+
+.new-post h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #8A2BE2; /* Roxo para título */
+}
+
+.new-post input,
+.new-post textarea{
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #8A2BE2; /* Bordas roxas */
+  border-radius: 8px;
+}
+
+.new-post textarea {
+  height: 40px; /* Altura ajustada para 40px */
+  resize: vertical;
+}
+
+.new-post button {
+  width: 100px;
+  background-color: #8A2BE2; /* Fundo roxo */
+  color: white;
+  cursor: pointer;
+  height: 40px; /* Altura ajustada para 40px */
+  margin-bottom: 10px;
+  border: 1px solid #8A2BE2; /* Bordas roxas */
+  border-radius: 8px;
+}
+
+.new-post button:hover {
+  background-color: #7A1D99; /* Roxo escuro quando hover */
+}
+
+/* Feed de posts */
+.posts-feed h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #8A2BE2;
+}
+
+.posts-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.post-item {
+  background-color: #333333; /* Fundo escuro para posts */
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.post-item h3 {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: white; /* Roxo para título de post */
+}
+
+.post-item p {
+  font-size: 1rem;
+  margin-bottom: 15px;
+  color: white; /* Verde mais suave para o texto */
+}
+
+.post-item .actions {
+  display: flex;
+  justify-content: space-between;
+}
+
+.post-item button {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.post-item button:hover {
+  background-color: #e64a19; /* Laranja escuro quando hover */
+}
+
+/* Rodapé */
+footer {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.9rem;
+  color: #999;
+}
+
+footer p {
+  margin: 10px 0;
+}
+
+/* Indicador de carregamento */
+.loading-status {
+  margin-top: 20px;
+  font-size: 1rem;
+  color: #8A2BE2; /* Roxo claro para o status de carregamento */
+  display: none; /* Inicialmente escondido */
+  text-align: center;
+}
+
+.loading-status.show {
+  display: block;
+}
