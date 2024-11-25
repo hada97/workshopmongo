@@ -161,6 +161,49 @@ async function deletePost(postId) {
   }
 }
 
+// Função para criar um novo usuário
+function createUser(event) {
+  event.preventDefault();  // Previne o comportamento padrão do form (recarregar a página)
+
+  // Pega os valores dos campos de nome e email
+  const name = document.getElementById('username').value;
+  const email = document.getElementById('email').value;
+
+  // Cria um objeto de usuário com os dados do formulário
+  const userData = { name, email };
+
+  // Envia os dados para o servidor via POST
+  fetch('http://localhost:8080/users', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(userData),
+  })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Erro ao criar o usuário');
+      }
+      return response.json();
+    })
+    .then(newUser => {
+      console.log('Novo usuário criado:', newUser);
+
+      // Limpa o formulário
+      document.getElementById('createUserForm').reset();
+
+      // Atualiza a lista de usuários
+      fetchUsers();
+
+      // Exibe uma mensagem de sucesso (pop-up simples)
+      alert('Usuário cadastrado com sucesso!');
+    })
+    .catch(error => {
+      console.error('Erro ao criar o usuário:', error);
+    });
+}
+
+
 // Função para buscar usuários do servidor
 function fetchUsers() {
   const loading = document.getElementById('loading');
@@ -230,12 +273,6 @@ async function deleteUser(userId) {
     }
   }
 }
-
-
-
-
-
-
 
 // Chama a função pela primeira vez quando a página carregar
 document.addEventListener('DOMContentLoaded', () => {
