@@ -40,29 +40,28 @@ header nav a:hover {
   text-decoration: underline;
 }
 
-/* Container principal */
+/* Container principal - metade do comprimento */
 .container {
-  max-width: 900px;
+  max-width: 450px; /* Alterado para metade do valor original */
   margin: 20px auto;
   padding: 20px;
   background-color: #222222; /* Fundo do container escuro */
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   border-radius: 8px;
 }
-
 /* Formulário de novo post */
 .new-post {
   margin-bottom: 20px;
 }
 
 .new-post h2 {
-  font-size: 1.5rem;
+  font-size: 1.125rem; /* Ajustado para manter a proporção */
   margin-bottom: 10px;
   color: #8A2BE2; /* Roxo para título */
 }
 
 .new-post input,
-.new-post textarea{
+.new-post textarea {
   width: 100%;
   padding: 10px;
   margin-bottom: 10px;
@@ -70,17 +69,24 @@ header nav a:hover {
   border-radius: 8px;
 }
 
+/* Input de título (input title) */
+.new-post input[type="text"] {
+  min-height: 37px; /* Altura mínima de 37px */
+}
+
+/* Área de texto do post (textarea) */
 .new-post textarea {
-  height: 40px; /* Altura ajustada para 40px */
+  height: 30px; /* Ajustado para uma proporção menor */
+  min-height: 37px; /* Altura mínima de 37px */
   resize: vertical;
 }
 
 .new-post button {
-  width: 100px;
+  width: 80px; /* Ajustado para manter proporção */
   background-color: #8A2BE2; /* Fundo roxo */
   color: white;
   cursor: pointer;
-  height: 40px; /* Altura ajustada para 40px */
+  height: 35px; /* Ajustado para manter proporção */
   margin-bottom: 10px;
   border: 1px solid #8A2BE2; /* Bordas roxas */
   border-radius: 8px;
@@ -92,7 +98,7 @@ header nav a:hover {
 
 /* Feed de posts */
 .posts-feed h2 {
-  font-size: 1.5rem;
+  font-size: 1.125rem; /* Ajustado para manter proporção */
   margin-bottom: 10px;
   color: #8A2BE2;
 }
@@ -104,21 +110,21 @@ header nav a:hover {
 
 .post-item {
   background-color: #333333; /* Fundo escuro para posts */
-  padding: 15px;
-  margin-bottom: 15px;
+  padding: 12px; /* Ajustado para manter proporção */
+  margin-bottom: 12px; /* Ajustado para manter proporção */
   border-radius: 8px;
   box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .post-item h3 {
-  font-size: 1.2rem;
-  margin-bottom: 10px;
+  font-size: 1rem; /* Ajustado para manter proporção */
+  margin-bottom: 8px; /* Ajustado para manter proporção */
   color: white; /* Roxo para título de post */
 }
 
 .post-item p {
-  font-size: 1rem;
-  margin-bottom: 15px;
+  font-size: 0.875rem; /* Ajustado para manter proporção */
+  margin-bottom: 12px; /* Ajustado para manter proporção */
   color: white; /* Verde mais suave para o texto */
 }
 
@@ -127,24 +133,32 @@ header nav a:hover {
   justify-content: space-between;
 }
 
+/* Botões do post: Editar e Excluir */
 .post-item button {
-  background-color: blue;
+  width: 80px; /* Ajustado para manter proporção */
+  background-color: #8A2BE2; /* Fundo roxo */
   color: white;
-  border: none;
-  padding: 5px 10px;
   cursor: pointer;
-  border-radius: 4px;
+  height: 35px; /* Ajustado para manter proporção */
+  margin-bottom: 10px;
+  border: 1px solid #8A2BE2; /* Bordas roxas */
+  border-radius: 8px;
 }
 
 .post-item button:hover {
   background-color: #e64a19; /* Laranja escuro quando hover */
 }
 
+
+.post-item button:hover {
+  background-color: purple; /* Laranja escuro quando hover */
+}
+
 /* Rodapé */
 footer {
   text-align: center;
   margin-top: 30px;
-  font-size: 0.9rem;
+  font-size: 0.8rem; /* Ajustado para manter proporção */
   color: #999;
 }
 
