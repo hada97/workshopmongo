@@ -2,7 +2,7 @@
 
 ## 💻 Sobre o Projeto
 
-[Veja como ficou em Produção!](https://workshop-eebvh5araad5hscs.canadacentral-01.azurewebsites.net/swagger-ui/index.html)
+[Veja como ficou em Produção!](https://workshop2-euctepgkf7hnc5fm.canadacentral-01.azurewebsites.net/)
 
 ## ⚙️ Funcionalidades
 
